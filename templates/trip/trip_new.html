@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/trip.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    {#    modal    #}
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="app">
+
+        <template>
+            <div id="m-content" class="main_container">
+                {% if trip.img_trip %}
+                    <div class="bg-image">
+                        <img src="{{ trip.img_trip.url }}" class="img-fluid" alt=""/>
+
+                        <h2 class="text-white">{{ trip.title|safe }}</h2>
+
+                        <div class="text-white price">{{ trip.price }} валюта</div>
+
+                        <div class="dates">{{ trip.date_start|date:"SHORT_DATE_FORMAT" }}
+                            - {{ trip.date_end|date:"SHORT_DATE_FORMAT" }}
+                        </div>
+
+                        <figure class="figure author">
+                            <img src="{{ trip.owner.avatar.url }}" class="logo" alt="">
+                            <div class="owner-name">
+                                <h4 class="text-white">{{ trip.owner.name }}</h4>
+                                <h5 class="descript">Автор тура</h5>
+                                <h5>Stars</h5>
+                            </div>
+                        </figure>
+
+                        <div class="m-button-group">
+                            <a href="#" class="m-button">Забронировать</a>
+                            <h6 class="text-white">Всего мест: {{ trip.number_party }}</h6>
+                        </div>
+
+
+                        <div id="#m-modal">
+
+                            <button type="button" class="btn" @click="showModal">
+                                Open Modal!
+                            </button>
+
+                            <modal v-show="isModalVisible" @close="closeModal"/>
+
+                            <transition name="modal-fade">
+                                <div class="modal-backdrop">
+                                    <div class="modal" role="dialog" aria-labelledby="modalTitle"
+                                         aria-describedby="modalDescription">
+                                        <header class="modal-header" id="modalTitle">
+                                            <slot name="header">
+                                                This is the default tile!
+
+                                                <button type="button" class="btn-close" @click="close"
+                                                        aria-label="Close modal">
+                                                    x
+                                                </button>
+                                            </slot>
+                                        </header>
+                                        <section class="modal-body" id="modalDescription">
+                                            <slot name="body">
+                                                I'm the default body!
+                                            </slot>
+                                        </section>
+                                        <footer class="modal-footer">
+                                            <slot name="footer">
+                                                I'm the default footer!
+                                                <button type="button" class="btn-green" @click="close"
+                                                        aria-label="Close modal">
+                                                    Close me!
+                                                </button>
+                                            </slot>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </transition>
+                        </div>
+
+                    </div>
+                {% endif %}
+
+                <div class="m-description">
+                    <h5 class="text-white">{{ trip.description|safe }}</h5>
+                </div>
+
+                <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+                    <section class="hero-section">
+                        <div class="card-grid">
+                            {% for card in trip.roadmap_trip.all %}
+                                <a class="card" href="#">
+                                    <div class="card__background"
+                                         style="background-image: url({{ card.img_day.url }})"></div>
+                                    <div class="card__content">
+                                        <p class="card__category">{{ card.day }}</p>
+                                        <p class="card__heading">{{ card.description }}</p>
+                                    </div>
+                                </a>
+                            {% endfor %}
+
+                            <div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="row justify-content-center block-included">
+
+                    <div class="col-4 included">
+                        <h3>В стоимость включено</h3>
+                        {{ trip.included_coast|safe }}
+                    </div>
+                    <div class="col-4 not-included">
+                        <h3>В стоимость не включено</h3>
+                        {{ trip.not_included_coast|safe }}
+                    </div>
+                </div>
+            </div>
+        </template>
+
+    </div>
+
+    {#    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>#}
+    {#    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>#}
+    <script>
+        const app = new Vue({}).$mount('#app');
+        MyContent = Vue.component('m-content', {
+            delimiters: ['[[', ']]'],
+            template: '#m-content',
+            data: {
+                isModalVisible: false
+            },
+            methods: {
+                showModal() {
+                    this.isModalVisible = true
+                },
+                closeModal() {
+                    this.isModalVisible = false
+                }
+            },
+            //beforeMount: function () {
+            // Get images
+            //    let el = this;
+            {#//    axios('{% url "api-user-images" %}')#}
+            //        .then(function (res) {
+            //            el.images = res.data;
+            //        });
+            //}
+        });
+        MyModal = Vue.component('modal', {
+            delimiters: ['[[', ']]'],
+            template: '#m-modal',
+            methods: {
+                close() {
+                    this.$emit('close');
+                },
+            },
+
+        })
+    </script>
+
+{% endblock %}

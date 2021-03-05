@@ -1,0 +1,137 @@
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('Ubuntu-Bold.eot');
+    src: local('Ubuntu Bold'), local('Ubuntu-Bold'),
+    url('Ubuntu-Bold.eot?#iefix') format('embedded-opentype'),
+    url('Ubuntu-Bold.woff') format('woff'),
+    url('Ubuntu-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Ubuntu-normal';
+    src: url('Ubuntu-Regular.eot');
+    src: local('Ubuntu Regular'), local('Ubuntu-Regular'),
+    url('Ubuntu-Regular.eot?#iefix') format('embedded-opentype'),
+    url('Ubuntu-Regular.woff') format('woff'),
+    url('Ubuntu-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.forms {
+    width: 400px;
+    border-right: 15px;
+    font-family: Ubuntu-normal;
+}
+
+.forms form {
+    background: #232323;
+    border: none!important;
+}
+
+.forms .h4 {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 41px;
+    color: #fff;
+}
+
+.form-group {
+    margin: 0!important;
+}
+
+.form-group label {
+    margin: 0!important;
+    color: #C9CEDD;
+    font-size: 12px;
+}
+
+.form-control {
+    font-size: 14px!important;
+}
+
+.form-group span{
+    color: #F8935A;
+}
+
+.forms form input {
+    background: #333333;
+}
+
+.forms form input:focus {
+    background: #333333;
+    border-color: #F8935A;
+}
+
+.forms .btn {
+    text-transform: none!important;
+}
+
+.forms .custom-control {
+    padding: 0 35px;
+}
+
+.forms .custom-control-label {
+    text-align: justify;
+    color: #fff;
+    font-size: 12px;
+}
+
+
+
+
+.thx {
+    width: 400px;
+    border-right: 15px;
+    font-family: Ubuntu-normal;
+    background: #232323;
+}
+
+.thx .h4, .thx .url {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 41px;
+    color: #fff;
+}
+
+.thx span{
+    display: block;
+    color: #C9CEDD;
+    font-size: 12px;
+}
+
+.thx .connect {
+    color: #6C7181;
+    font-size: 12px;
+}
+
+.thx .url {
+    font-size: 32px;
+    color: #2f80ed!important;
+}
+
+.thx .list-group li img {
+    width: 40px;
+    height: 40px;
+}
+
+.thx .list-group li {
+    margin-right: 10px;
+}
+
+.thx .list-group {
+    margin: 0 auto;
+    display: inline-flex;
+}
+
+.thx .list-group li{
+    list-style: none;
+    color: #C9CEDD;
+}
+
